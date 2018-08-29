@@ -1,0 +1,139 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longtitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 5
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Amsterdam
+  # Customization file
+  customize: !include yaml/customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+  extra_html_url:
+    - /local/lovelace.html
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+  # base_url: !secret base_url
+  #ssl_certificate: /ssl/fullchain.pem
+  #ssl_key: /ssl/privkey.pem
+  api_password: !secret api_wachtwoord
+  server_port: !secret server_port
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+
+# Text to speech
+tts:
+  - platform: google
+google_assistant:
+  project_id: !secret google_project_id
+  client_id: !secret google_client_id
+  access_token: [a different long URL safe random string]
+  agent_user_id: [a string to identify user]
+  api_key: [a Homegraph API Key generated for the Google Actions project]
+  exposed_domains:
+    - switch
+    - light
+    - group
+  entity_config:
+    switch.kitchen:
+      name: Custom Name for Google Assistant
+      aliases:
+        - bright lights
+        - entry lights
+    light.living_room:
+      expose: false
+      room: living room
+  
+# Cloud
+cloud:
+
+mqtt:
+  broker: core-mosquitto
+  username: !secret mqtt_user
+  password: !secret mqtt_wacht
+
+climate:
+  platform: nefit
+  name: Heating
+  serial: !secret nefit_serial
+  accesskey: !secret nefit_access
+  password: !secret nefit_pass
+
+google:
+  client_id: !secret google_client_id2
+  client_secret: !secret google_client_secret2
+panel_iframe:
+  muziek:
+    title: 'Muziek'
+    url: !secret muziek_ip
+    icon: mdi:lan-connect
+  nano:
+    title: "Nano"
+    url: !secret nano_ip
+    icon: mdi:pen
+  terminal:
+    title: "Terminal"
+    url: !secret terminal_ip
+    icon: mdi:ssh
+  grafieken:
+    title: "Grafieken"
+    url: !secret grafieken_ip
+    icon: mdi:chart-line
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+     - key: fay2y3jnyet596ee
+weather: !include yaml/weather.yaml
+switch: !include yaml/switches.yaml
+group: !include yaml/groups.yaml
+automation: !include yaml/automations.yaml
+script: !include yaml/scripts.yaml
+sensor: !include yaml/sensor.yaml
+camera: !include yaml/camera.yaml
+device_tracker: !include yaml/device_tracker.yaml
+zone: !include yaml/zone.yaml
+media_player: !include yaml/media_player.yaml
+recorder: !include yaml/recorder.yaml

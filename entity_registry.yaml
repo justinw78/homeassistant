@@ -1,0 +1,30 @@
+media_player.woonkamer:
+  config_entry_id:
+  name:
+  platform: squeezebox
+  unique_id: 00:00:00:00:00:01
+light.gateway_light_7811dcb8c942:
+  config_entry_id:
+  name: Overloop (nacht)
+  platform: xiaomi_aqara
+  unique_id: rgb7811dcb8c942
+sensor.illumination_7811dcb8c942:
+  config_entry_id:
+  name: lichtintensiviteitoverloop
+  platform: xiaomi_aqara
+  unique_id: illumination7811dcb8c942
+binary_sensor.wall_switch_left_158d00026dafcd:
+  config_entry_id:
+  name:
+  platform: xiaomi_aqara
+  unique_id: channel_0158d00026dafcd
+binary_sensor.wall_switch_right_158d00026dafcd:
+  config_entry_id:
+  name:
+  platform: xiaomi_aqara
+  unique_id: channel_1158d00026dafcd
+binary_sensor.wall_switch_both_158d00026dafcd:
+  config_entry_id:
+  name:
+  platform: xiaomi_aqara
+  unique_id: dual_channel158d00026dafcd

@@ -1,0 +1,980 @@
+name: Sophia, Alina en Justin
+resources:
+  - url: /local/content-card-example.js
+    type: js
+  - url: /local/content-card-tijd.js
+    type: js
+  - url: /local/gauge-card.js
+    type: js
+  - url: /local/tracker-card.js?v=0
+    type: js
+  - url: https://unpkg.com/moment@2.22.2/moment.js
+    type: js
+  - url: /local/calendar/calendar-card.js
+    type: module
+  - url: /local/circle-sensor-card.js
+    type: module
+  
+views:
+#  - title: test
+#    cards:
+#      - type: iframe
+#        url: /local/test.html
+#        aspect_ratio: 75%
+#           - type: entities
+#             title: windhoek
+#             entities:
+#              - sensor.windhoek
+#     - type: horizontal-stack
+#       cards:
+  - icon: mdi:home-automation
+    title: Home
+    cards: 
+     - type: picture-elements
+       image: /local/lovelace/icons/afval.png
+       elements:
+         - type: custom:hui-markdown-card
+           content: >
+             Klok
+           style:
+             top: 6%
+             left: 1%
+             font-size: 18px
+             color: white
+             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+             "--paper-card-background-color": none
+             "--paper-material-elevation-1_-_box-shadow": none
+             "--shadow-elevation-2dp_-_box-shadow": none
+             transform: translate(0%,-50%)
+         - type: state-icon
+           entity: sensor.time
+           title: Tijd
+           style:
+             left: 3%
+             top: 10%
+             "--iron-icon-fill-color": '#FFFFFF'
+             transform: none
+         - type: state-label
+           entity: sensor.time
+           title: Tijd
+           style:
+             left: 10%
+             top: 10%
+             font-size: 40px
+             color: white
+             transform: none
+         - type: state-icon
+           entity: sensor.date
+           title: Datum
+           style:
+             left: 35%
+             top: 10%
+             "--iron-icon-fill-color": '#FFFFFF'
+             transform: none
+         - type: state-label
+           entity: sensor.date
+           title: datum
+           style:
+             left: 42%
+             font-size: 40px
+             top: 10%
+             color: white
+             transform: none
+         - type: state-icon
+           entity: sensor.afval
+           title: afvalicon
+           style:
+             left: 3%
+             top: 60%
+             "--iron-icon-fill-color": red
+             transform: none
+         - type: state-label
+           entity: sensor.afvalsoort
+           title: Afvalsoort
+           style:
+             font-size: 25px
+             left: 15%
+             top: 60%
+             color: white
+             transform: none
+         - type: state-label
+           entity: sensor.afvaldate
+           title: Afhaalmoment
+           style:
+             font-size: 25px
+             left: 40%
+             top: 75%
+             color: white
+             transform: none
+     - type: vertical-stack
+       cards:
+        - type: horizontal-stack
+          cards:
+           - type: custom:gauge-card
+             title: Watertemperatuur
+             entity: sensor.watertemperatuur
+             scale: 30px
+             severity:
+               red: 20
+               green: 10
+               blue: 0
+             min: 0
+             max: 30
+           - type: custom:gauge-card
+             title: Buitentemperatuur
+             entity: sensor.temp_thuis
+             scale: 30px
+             severity:
+               red: 30
+               orange: 25
+               green: 20
+               blue: 0
+             min: -20
+             max: 40
+           - type: custom:gauge-card
+             title: Vochtigheid
+             entity: sensor.vochtigheid_buiten
+             scale: 30px
+             severity:
+               red: 80
+               green: 40
+               amber: 60
+           - type: custom:gauge-card
+             title: Windsnelheid
+             entity: sensor.windsnelheid
+             scale: 30px
+             severity:
+               red: 80
+               blue: 4
+               green: 0
+             min: -1
+             max: 15
+     - type: "custom:calendar-card"
+       showProgressBar: false
+       name: Agenda
+       entities: 
+#sensor.agenda_week
+         - calendar.justinw78gmailcom
+         - calendar.schoolvakanties
+         - calendar.feestdagen_in_nederland
+         - calendar.christelijke_feestdagen
+         - calendar.verjaardagen_van_vrienden
+  - icon: mdi:fish
+    title: Tuin
+#  theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: picture-glance
+        image: /local/tuin.jpg?auto=compress&cs=tinysrgb&dpr=2&h=240&w=495
+        title: Tuin
+        entities:
+          - switch.lichtslang
+          - switch.spotjes
+          - switch.tl
+          - switch.waterpomp
+          - switch.pomp_zwembad
+  - icon: mdi:cctv
+    title: Camera's
+    cards:
+      - type: picture-glance
+        image:
+        camera_image: camera.sophiacam
+        title: SophiaCam
+        entities:
+          - camera.sophiacam
+      - type: picture-glance
+        image:
+        title: koicam
+        camera_image: camera.koicam
+        entities: 
+          - camera.koicam
+  - icon: mdi:youtube-tv
+    title: Media
+    cards:
+      - type: media-control
+        entity: media_player.kodi_beneden
+      - type: media-control
+        entity: media_player.woonkamer
+  - icon: mdi:lightbulb-on-outline
+    title: Midden
+    cards:
+      - type: entities
+        title: Verlichting Begane Grond
+        show_header_toggle: true
+        entities:
+         - switch.woonkamer
+         - switch.eettafel
+         - switch.keuken
+         - switch.gang
+         - switch.wclamp
+      - type: entities
+        title: Verlichting Midden Verdieping
+        show_header_toggle: true
+        entities:
+         - switch.babykamer
+         - switch.douchewit
+         - switch.leddouche
+         - switch.overloop
+         - switch.slaapkamer
+         - switch.slaapkamerlees
+         - switch.speelkamer
+         - switch.speelkamerdisco
+         - light.gateway_light_7811dcb8c942
+      - type: entities
+        title: Verlichting Zolder
+        show_header_toggle: true
+        entities:
+         - switch.zolderhalogeen
+         - switch.zoldertl
+         - switch.verlichting_opslag
+         - switch.verlichting_hal
+      - type: entities
+        title: Verlichting Buiten
+        show_header_toggle: true
+        entities:
+         - switch.lichtslang
+         - switch.spotjes
+         - switch.tl
+         - switch.waterpomp
+         - switch.pomp_zwembad
+  - icon: mdi:account-heart
+    title: overzicht
+    cards:
+      - type: entity-filter
+        entities:
+           - device_tracker.justin_alina
+           - device_tracker.justin_teljustin
+        state_filter:
+          - 'home'
+        card: 
+          type: glance
+          title: Welkom Thuis
+      - type: entity-filter
+        entities:
+           - device_tracker.justin_alina
+           - device_tracker.justin_teljustin
+        state_filter:
+          - 'Werk'
+        card: 
+          type: glance
+          title: Werk
+      - type: entities
+        title: Actuele Tijd van en naar werk
+        entities:
+          - sensor.1_doorn_amsterdam
+          - sensor.2_amsterdam_doorn
+          - sensor.3_doorn_bunschoten
+          - sensor.4_bunschoten_doorn
+      - type: entities
+        title: Afstand naar huis
+        entities:
+          - sensor.alina_tot_huis
+          - sensor.justin_tot_huis
+      - type: map
+        aspect_ratio: 100%
+        entities:
+          - entity: device_tracker.justin_alina
+          - entity: device_tracker.justin_teljustin
+          - zone.home
+  - icon: mdi:weather-sunny
+    title: Weer
+    cards:
+      - type: weather-forecast
+        entity: weather.doorn
+      - type: picture-glance
+        image:
+        title: Weer Nederland
+        camera_image: camera.weerkaart_nl
+        entities: 
+          - camera.weerkaart_nl
+      - type: weather-forecast
+        entity: weather.moskou
+      - type: weather-forecast
+        entity: weather.pomorie
+      - type: iframe
+        url: https://embed.windy.com/embed2.html?lat=52.050&lon=5.283&zoom=7&level=surface&overlay=wind&menu=&message=true&marker=&calendar=&pressure=true&type=map&location=coordinates&detail=true&detailLat=52.050&detailLon=5.283&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
+        title: Wind
+        aspect_ratio: 180%
+  - icon: mdi:run-fast
+    title: Fitbit
+#    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+  #  - type: custom:gauge-card
+ #       title: Batterijniveau
+  #      entity: sensor.charge_2_battery
+   #     min: low
+    #    max: high
+     # - type: custom:gauge-card
+      - type: picture-elements
+        image: /local/lovelace/icons/fitbit.png
+        elements:
+         - type: custom:circle-sensor-card
+           entity: sensor.weight_loss
+           max: 65
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: loss
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             font-color: white
+             text-shadow: '2px 2px black'
+           style:
+             top: 5%
+             left: 80%
+             width: 4em
+             height: 4em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.steps
+           max: 20000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: stappen
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             10000: '#0BDF0E'
+           style:
+             top: 60%
+             left: 1%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.floors
+           max: 10
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Trappen
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px white'
+           color_stops:
+             1: '#09C7E8'
+             10: '#0BDF0E'
+           style:
+             top: 60%
+             left: 20%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.distance
+           max: 20
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Afstand
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             10: '#0BDF0E'
+           style:
+             top: 60%
+             left: 39%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.calories
+           max: 3000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Calorie
+           shadow: true
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             3000: '#0BDF0E'
+           style:
+             top: 60%
+             left: 59%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.minutes_fairly_active
+           max: 30
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: actief
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             30: '#0BDF0E'
+           style:
+             top: 60%
+             left: 80%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:hui-markdown-card
+           content: >
+             Justin
+           style:
+             top: 6%
+             left: 1%
+             font-size: 18px
+             color: white
+             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+             "--paper-card-background-color": none
+             "--paper-material-elevation-1_-_box-shadow": none
+             "--shadow-elevation-2dp_-_box-shadow": none
+             transform: translate(0%,-50%)
+         - type: state-icon
+           entity: sensor.weight
+           title: Gewicht
+           style:
+             left: 3%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.weight
+           title: Gewicht
+           style:
+             left: 10%
+             top: 8%
+             color: white
+             transform: none
+         - type: state-icon
+           entity: sensor.bmi
+           title: BMI
+           style:
+             left: 35%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.bmi
+           title: BMI
+           style:
+             left: 42%
+             top: 8%
+             color: white
+             transform: none
+         - type: state-icon
+           entity: sensor.body_fat
+           title: Body Fat
+           style:
+             left: 60%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.body_fat
+           title: Body Fat
+           style:
+             left: 70%
+             top: 8%
+             color: white
+             transform: none
+         - type: image
+           entity: sensor.charge_2_battery
+           title: Batterij
+           image: /local/lovelace/icons/battery.png
+           state_image:
+             "High": /local/lovelace/icons/battery-ful.png
+             "Medium": /local/lovelace/icons/battery-medium.png
+             "Low": /local/lovelace/icons/battery-low.png
+             "Empty": /local/lovelace/icons/battery-0.png
+           style:
+             left: 20%
+             top: 1%
+             transform: none
+             width: 24px
+             height: 24px
+         - type: state-icon
+           entity: sensor.resting_heart_rate
+           title: Resting HR
+           style:
+             left: 20%
+             top: 21%
+             "--iron-icon-fill-color": red
+             transform: none
+         - type: state-label
+           entity: sensor.resting_heart_rate
+           title: Resting HR
+           style:
+             left: 26%
+             top: 22%
+             color: white
+             transform: none
+      - type: entities
+        title: Fitbit
+        entities:
+          - sensor.charge_2_battery
+          - sensor.activity_calories
+          - sensor.calories_bmr
+          - sensor.elevation
+          - sensor.minutes_after_wakeup
+          - sensor.sleep_minutes_to_fall_asleep
+      - type: picture-elements
+        image: /local/lovelace/icons/night.png
+        elements:
+         - type: custom:circle-sensor-card
+           entity: sensor.weight_loss
+           max: 65
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: loss
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             font-color: white
+             text-shadow: '2px 2px black'
+           style:
+             top: 5%
+             left: 80%
+             width: 4em
+             height: 4em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.sleep_efficiency
+           max: 100
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Efficientie
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             10000: '#0BDF0E'
+           style:
+             top: 60%
+             left: 1%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.sleep_minutes_asleep
+           max: 800
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Slaaptijd
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px white'
+           color_stops:
+             1: '#09C7E8'
+             10: '#0BDF0E'
+           style:
+             top: 60%
+             left: 20%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.sleep_minutes_awake
+           max: 800
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Wakker
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             10: '#0BDF0E'
+           style:
+             top: 60%
+             left: 39%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.sleep_time_in_bed
+           max: 800
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: TijdinBed
+           shadow: true
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             3000: '#0BDF0E'
+           style:
+             top: 60%
+             left: 59%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.awakenings_count
+           max: 10
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#125054'
+           name: Wakker
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#09C7E8'
+             30: '#0BDF0E'
+           style:
+             top: 60%
+             left: 80%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:hui-markdown-card
+           content: >
+             SlaapKaart
+           style:
+             top: 6%
+             left: 1%
+             font-size: 18px
+             color: white
+             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+             "--paper-card-background-color": none
+             "--paper-material-elevation-1_-_box-shadow": none
+             "--shadow-elevation-2dp_-_box-shadow": none
+             transform: translate(0%,-50%)
+         - type: state-icon
+           entity: sensor.sleep_start_time
+           title: Slaaptijd
+           style:
+             left: 3%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.sleep_start_time
+           title: Slaaptijd
+           style:
+             left: 10%
+             top: 8%
+             color: white
+             transform: none
+  - icon: mdi:flash-outline
+    title: Energie
+#    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+  #  - type: custom:gauge-card
+ #       title: Batterijniveau
+  #      entity: sensor.charge_2_battery
+   #     min: low
+    #    max: high
+     # - type: custom:gauge-card
+      - type: picture-elements
+        image: /local/lovelace/icons/energie.png
+        elements:
+         - type: custom:circle-sensor-card
+           entity: sensor.power_consumption_w
+           max: 4000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#003300'
+           name: Verbruik
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#53ff1a'
+             10000: '#ff0000'
+           style:
+             top: 60%
+             left: 10%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.power_consumption_w_l1
+           max: 3000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#003300'
+           name: L1
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px white'
+           color_stops:
+             1: '#53ff1a'
+             10: '#ff0000'
+           style:
+             top: 60%
+             left: 30%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.power_consumption_w_l2
+           max: 3000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#003300'
+           name: L2
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#53ff1a'
+             10: '#ff0000'
+           style:
+             top: 60%
+             left: 50%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:circle-sensor-card
+           entity: sensor.power_consumption_w_l3
+           max: 3000
+           min: 0
+           stroke_width: 15
+           gradient: true
+           fill: '#003300'
+           name: L3
+           shadow: true
+           units: ' '
+           font_style:
+             font-size: 1.1em
+             color: white
+             text-shadow: '0px 0px black'
+           color_stops:
+             1: '#53ff1a'
+             3000: '#ff0000'
+           style:
+             top: 60%
+             left: 70%
+             width: 5em
+             height: 5em
+             transform: none
+         - type: custom:hui-markdown-card
+           content: >
+             StroomVerbruik
+           style:
+             top: 6%
+             left: 1%
+             font-size: 18px
+             color: white
+             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+             "--paper-card-background-color": none
+             "--paper-material-elevation-1_-_box-shadow": none
+             "--shadow-elevation-2dp_-_box-shadow": none
+             transform: translate(0%,-50%)
+         - type: state-icon
+           entity: sensor.power_consumption_low
+           title: Verbruik laag (KWH)
+           style:
+             left: 3%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.power_consumption_low
+           title: Verbruik Laag (KWH)
+           style:
+             left: 10%
+             top: 8%
+             color: white
+             transform: none
+         - type: state-icon
+           entity: sensor.power_consumption_normal
+           title: Verbruik Hoog (KWH)
+           style:
+             left: 35%
+             top: 7%
+             "--iron-icon-fill-color": '#09C7E8'
+             transform: none
+         - type: state-label
+           entity: sensor.power_consumption_normal
+           title: Verbruik Hoog (KWH)
+           style:
+             left: 42%
+             top: 8%
+             color: white
+             transform: none
+      - type: history-graph
+        title: 'Energie'
+        hours_to_show: '7200'
+        entities:
+          - sensor.power_consumption_w
+          - sensor.power_consumption_w_l1
+          - sensor.power_consumption_w_l2
+          - sensor.power_consumption_w_l3
+  - icon: mdi:account-settings-variant
+    title: Settings
+    cards: 
+      - type: horizontal-stack
+        cards:
+        - type: custom:gauge-card
+          title: DownloadSnelheid
+          entity: sensor.speedtest_download
+          scale: 30px
+          severity:
+            red: 10
+            blue: 20
+            green: 30
+          min: 0
+          max: 40
+        - type: custom:gauge-card
+          title: UploadSnelheid
+          entity: sensor.speedtest_upload
+          scale: 30px
+          severity:
+            orange: 2
+            amber: 4
+            green: 6
+          min: 0
+          max: 10
+        - type: custom:gauge-card
+          title: Ping
+          entity: sensor.speedtest_ping
+          scale: 30px
+          severity:
+            green: 5
+            red: 10
+            amber: 15
+          min: 0
+          max: 20
+      - type: horizontal-stack
+        cards:
+         - type: custom:gauge-card
+           title: Gebruikt geheugen
+           entity: sensor.memory_use_percent
+           scale: 30px
+           severity:
+             green: 0
+             orange: 50
+             red: 70
+           min: 0
+           max: 100
+         - type: custom:gauge-card
+           title: DiskPi
+           entity: sensor.disk_use_percent_home
+           scale: 30px
+           severity:
+             red: 90
+             orange: 70
+             green: 0
+           min: 0
+           max: 100
+         - type: custom:gauge-card
+           title: Processori
+           entity: sensor.processor_use
+           scale: 30px
+           severity:
+             red: 90
+             orange: 70
+             green: 0
+           min: 0
+           max: 100
+      - type: horizontal-stack
+        cards:
+         - type: custom:gauge-card
+           title: Gebruikt geheugen
+           entity: sensor.swap_use_percent
+           scale: 30px
+           severity:
+             green: 0
+             orange: 50
+             red: 70
+           min: 0
+           max: 100
+      - type: entities
+        title: Pi informatie
+        entities: 
+          - sensor.last_boot
+          - sensor.load_1m
+          - sensor.load_5m
+          - sensor.load_15m
+          - sensor.memory_use
+          - sensor.memory_free
+      - type: entities
+        title: PostNL
+        entities:
+          - sensor.postnl
+      - type: entities
+        title: Baterij niveau
+        entities:
+          - sensor.batterij_regenmeter
+          - sensor.batterij_thermometer
+          - sensor.batterij_thermometer_water
+          - sensor.batterij_windmeter
+          - sensor.switch1_battery_sensor
+      - type: custom:tracker-card
+        title:
+        trackers:
+          - sensor.custom_card_tracker
+          - sensor.custom_component_tracker
+      - type: iframe
+        url: http://192.168.2.50:9000
+        title: LMS
+        aspect_ratio: 180%
+  - icon: mdi:fan
+    title: Afzuiging
+#    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: entities
+        title: Afzuiging
+        entities:
+          - switch.afzuiging1
+          - switch.afzuiging2
+          - switch.wcventilator

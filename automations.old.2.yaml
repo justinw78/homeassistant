@@ -1,0 +1,66 @@
+- alias: If there is motion and its dark turn on the gateway light
+  trigger:
+    platform: state
+    entity_id: binary_sensor.wall_switch_left_158d00026dafcd
+    from: 'off'
+    to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.tl
+- id: '1531416380909'
+  alias: lichtslang aan
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - alias: ''
+    data: {}
+    service: switch.turn_on
+- id: '1535388549740'
+  alias: Tl Blokhut
+  trigger:
+  - entity_id: binary_sensor.wall_switch_left_158d00026dafcd
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tl
+    service: light.turn_on
+- id: '1535388644111'
+  alias: TL on blokhut
+  trigger:
+  - entity_id: binary_sensor.wall_switch_left_158d00026dafcd
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tl
+    service: light.turn_on
+- id: '1535388829707'
+  alias: tl
+  trigger:
+  - entity_id: binary_sensor.wall_switch_left_158d00026dafcd
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    service: switch.turn_on
+- id: '1535389874051'
+  alias: tl aan
+  trigger:
+  - entity_id: binary_sensor.wall_switch_right_158d00026dafcd
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tl
+    service: switch.turn_on
