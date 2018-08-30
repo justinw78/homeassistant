@@ -1,0 +1,54 @@
+- alias: Turn on/off TL blokhut
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d00026dafcd
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.tl
+- alias: Turn on/off spotjes blokhut
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.wall_switch_right_158d00026dafcd
+      click_type: single
+  action:
+    service: switch.toggle
+    entity_id: switch.spotjes
+- alias: Turn on/off lichtslang blokhut
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d00026dafcd
+      click_type: both
+  action:
+    service: switch.toggle
+    entity_id: switch.lichtslang
+- alias: Turn on nachtlamp overloop
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.illumination_7811dcb8c942
+    below: 200.0
+  condition:
+    condition: time
+    after: '18:00:01'
+    before: '08:20:00'
+  action:
+    - service: light.turn_on
+      entity_id: light.gateway_light_7811dcb8c942
+- alias: turn off nachtlamp overloop
+  trigger: 
+    platform: numeric_state
+    entity_id: sensor.illumination_7811dcb8c942
+    above: 300.0
+  condition:
+    condition: time
+    after: '08:20:01'
+    before: '18:00:00'
+  action: 
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcb8c942

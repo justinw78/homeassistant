@@ -1,0 +1,9 @@
+  - platform: yweather
+    woeid: 728796
+    name: Doorn
+  - platform: yweather
+    woeid: 2122265
+    name: Moskou
+  - platform: yweather
+    woeid: 838878
+    name: Pomorie

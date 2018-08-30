@@ -1,0 +1,59 @@
+switch.lichtslang:
+  icon: mdi:flash
+switch.spotjes:
+  icon: mdi:track-light
+switch.tl:
+  icon: mdi:ceiling-light
+switch.waterpomp:
+  icon: mdi:water-pump
+sensor.1_doorn_amsterdam:
+  friendly_name: Doorn - Amsterdam
+  icon: mdi:car
+sensor.2_amsterdam_doorn:
+  friendly_name: Amsterdam - Doorn
+  icon: mdi:car
+sensor.3_doorn_bunschoten:
+  friendly_name: Doorn - Bunschoten
+  icon: mdi:car
+sensor.4_bunschoten_doorn:
+  friendly_name: Bunschoten - Doorn
+  icon: mdi:car
+device_tracker.justin_alina:
+  friendly_name: Alina
+  entity_picture: /local/alina.jpg
+device_tracker.justin_teljustin:
+  friendly_name: justin
+  entity_picture: /local/justin.jpg
+sensor.alina_tot_huis:
+  icon: mdi:rabbit
+sensor.justin_tot_huis:
+  icon: mdi:rabbit
+switch.pomp_zwembad:
+  icon: mdi:pool
+#sensor.afvaldate:  
+#  entity_picture_template: >-
+#          {% if is_state('binary_sensor.router', 'on') %}
+#            /local/online.ico
+#            /local/offline.ico
+#          {% endif %}
+sensor.agenda_week:
+  friendly_name: Weeknummer
+  icon: mdi:book-open
+sensor.verjaardag_datum:
+  friendly_name: Eerste verjaardag
+  icon: mdi:calendar-question
+sensor.verjaardag_message:
+  friendly_name: Naam
+  icon: mdi:cake-variant
+sensor.feestdagen_datum:
+  friendly_name: Eerste feestdag
+  icon: mdi:calendar-question
+sensor.feestdagen_message:
+  friendly_name: Naam
+  icon: mdi:vlc
+sensor.afspraak_datum:
+  friendly_name: Eerste afspraak
+  icon: mdi:calendar-question
+sensor.afspraak_message:
+  friendly_name: Afspraak
+  icon: mdi:account-multiple

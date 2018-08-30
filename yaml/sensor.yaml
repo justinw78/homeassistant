@@ -1,0 +1,254 @@
+#  - platform: google_travel_time
+#    name: 1_doorn_amsterdam
+#    api_key: !secret api1
+#    origin: domproostlaan 2, 3941 KG, Doorn , Nederland
+#    destination: Johannes Vermeerstraat 29, 1071 DL, Amsterdam, Nederland
+#    departure_time: 08:00:00
+#  - platform: google_travel_time
+#    name: 2_amsterdam_doorn
+#    api_key: !secret api2
+#    origin: Johannes Vermeerstraat 29, 1071 DL, Amsterdam, Nederland
+#    destination: domproostlaan 2, 3941 KG, Doorn , Nederland
+#  - platform: google_travel_time
+#    name: 3_doorn_bunschoten
+#    api_key: !secret api3
+#    origin: domproostlaan 2, 3941 KG, Doorn , Nederland
+#    destination: Broerswetering 8, 3752 AM, Bunschoten-Spakenburg, Nederland
+#  - platform: google_travel_time
+#    name: 4_bunschoten_doorn
+#    api_key: !secret api4
+#    origin: Broerswetering 8, 3752 AM Bunschoten-Spakenburg, Nederland
+#    destination: domproostlaan 2, 3941 KG, Doorn , Nederland
+#  - platform: google_travel_time
+#    name: Alina tot huis
+#    icon: mdi:rabbit
+#    api_key: !secret api5
+#    origin: device_tracker.justin_alina
+#    destination: zone.home
+#  - platform: google_travel_time
+#    name: Justin tot huis
+#    icon: mdi:rabbit
+#    api_key: !secret api6
+#    origin: device_tracker.justin_teljustin
+#    destination: zone.home
+  - platform: speedtest
+    minute:
+      - 0
+      - 30
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  - platform: fitbit
+    clock_format: 24H
+    monitored_resources:
+      - activities/activityCalories
+      - activities/calories
+      - activities/caloriesBMR
+      - activities/distance
+      - activities/elevation
+      - activities/floors
+      - activities/heart
+      - activities/minutesFairlyActive
+      - activities/minutesLightlyActive
+      - activities/minutesSedentary
+      - activities/minutesVeryActive
+      - activities/steps
+      - body/bmi
+      - body/fat
+      - body/weight
+      - devices/battery
+      - sleep/awakeningsCount
+      - sleep/efficiency
+      - sleep/minutesAfterWakeup
+      - sleep/minutesAsleep
+      - sleep/minutesAwake
+      - sleep/minutesToFallAsleep
+      - sleep/startTime
+      - sleep/timeInBed
+  - platform: postnl
+    username: !secret postnl_user
+    password: !secret postnl_pass
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -t -d Watertemp"
+    name: Watertemperatuur
+    unit_of_measurement: "°C"
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -h -d Thermometer1"
+    name: Vochtigheid Buiten
+    unit_of_measurement: "%"
+  - platform: scrape
+    resource: !secret scrape_source
+    select: ".firstDate"
+    name: afvaldate
+  - platform: scrape
+    resource: !secret scrape_source2
+    select: ".firstWasteType"
+    name: afvalsoort
+    entity_picture_template: >-
+  - platform: template
+    sensors:
+      afval:
+        friendly_name: "Afval"
+        value_template: '{% if is_state("sensor.afvalsoort", "Plastic, Metalen en Drankkartons") %} Online {% else %}Offline{% endif %}'
+        entity_picture_template: >-
+          {% if is_state('sensor.afvalsoort', 'Plastic, Metalen en Drankkartons') %}
+            /local/afval/pmd.png
+          {% elif is_state('sensor.afvalsoort', 'Milieustraat gesloten') %}
+            /local/afval/straat.png
+          {% elif is_state('sensor.afvalsoort', 'Grof snoeiafval') %}
+            /local/afval/grof.png
+          {% elif is_state('sensor.afvalsoort', 'Groente, Fruit en Tuinafval') %}
+            /local/afval/agf.png
+          {% elif is_state('sensor.afvalsoort', 'Restafval') %}
+            /local/afval/rest.png
+          {% elif is_state('sensor.afvalsoort', 'Papier en karton') %}
+            /local/afval/papier.png
+          {% elif is_state('sensor.afvalsoort', 'Klein chemisch afval') %}
+            /local/afval/chemisch.png
+          {% else %}    
+            /local/afval/grof.png
+          {% endif %}
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -t -d Thermometer1"
+    name: Temp thuis
+    unit_of_measurement: "°C"
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -r -d Regenmeter"
+    name: Regen
+    unit_of_measurement: "mm"
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -b -d Regenmeter"
+    name: Batterij Regenmeter
+    unit_of_measurement: ""
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -a -d Thermometer1"
+    name: Batterij Thermometer
+    unit_of_measurement: ""
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -a -d Watertemp"
+    name: Batterij Thermometer Water
+    unit_of_measurement: ""
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -w -d Windmeter"
+    name: Windsnelheid
+    unit_of_measurement: "km/h"
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -v -d Windmeter"
+    name: Batterij Windmeter
+    unit_of_measurement: ""
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -z -d Windmeter"
+    name: Windhoek
+    unit_of_measurement: "Richting"
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -k -d Douche"
+    name: Sensor
+    unit_of_measurement: ""
+  - platform: command_line
+    command: "/config/homewizard/homewizard.sh -k -d Bewegingwc"
+    name: Beweging Toilet
+    unit_of_measurement: ""
+  - platform: mqtt
+    name: "Douche Temp"
+    state_topic: "tele/leddouche/SENSOR"
+    qos: 1
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.AM2301.Temperature }}"
+  - platform: mqtt
+    name: "Vochtigheid douche"
+    state_topic: "tele/leddouche/SENSOR"
+    qos: 1
+    unit_of_measurement: "%"
+    value_template: "{{ value_json.AM2301.Humidity }}"
+  - platform: scrape
+    resource: !secret scrape_source3
+    select: ".div.item:nth-of-type(2)"
+    name: 112
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: disk_use
+      - type: disk_free
+      - type: memory_use_percent
+      - type: memory_use
+      - type: memory_free
+      - type: swap_use_percent
+      - type: swap_use
+      - type: swap_free
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+      - type: network_in
+        arg: wlan0
+      - type: network_out
+        arg: wlan0
+      - type: packets_in
+        arg: wlan0
+      - type: packets_out
+        arg: wlan0
+      - type: ipv4_address
+        arg: wlan0
+      - type: processor_use
+      - type: process
+      - type: last_boot
+      - type: since_last_boot
+#  - platform: template
+#    sensors:
+#      feestdagen_message:
+#        value_template: '{{ states.calendar.feestdagen_in_nederland.attributes.message }}'
+#        unit_of_measurement: ''
+#      feestdagen_datum:
+#        value_template: '{{ states.calendar.feestdagen_in_nederland.attributes.start_time }}'
+#        unit_of_measurement: ''
+#      agenda_week:
+#        value_template: '{{ states.calendar.week_numbers.attributes.message }}'
+#        unit_of_measurement: ''
+#      verjaardag_message:
+#        value_template: '{{ states.calendar.verjaardagen_van_vrienden.attributes.message }}'
+#        unit_of_measurement: ''
+#      verjaardag_datum:
+#        value_template: '{{ states.calendar.verjaardagen_van_vrienden.attributes.start_time }}'
+#        unit_of_measurement: ''
+#      afspraak_message:
+#        value_template: '{{ states.calendar.justinw78gmailcom.attributes.message }}'
+#        unit_of_measurement: ''
+#      afspraak_datum:
+#        value_template: '{{ states.calendar.justinw78gmailcom.attributes.start_time }}'
+#        unit_of_measurement: ''
+  - platform: dsmr
+    port: /dev/ttyUSB0
+    dsmr_version: 5
+  - platform: template
+    sensors:
+      power_consumption_w:
+        value_template: '{{ states.sensor.power_consumption.state | multiply(1000) }}'
+        friendly_name: 'Stroomverbruik'
+        unit_of_measurement: 'Watt'
+      power_consumption_w_l1:
+        value_template: '{{ states.sensor.power_consumption_phase_l1.state | multiply(1000) }}'
+        friendly_name: 'Stroomverbruik L1'
+        unit_of_measurement: 'Watt'
+      power_consumption_w_l2:
+        value_template: '{{ states.sensor.power_consumption_phase_l2.state | multiply(1000) }}'
+        friendly_name: 'Stroomverbruik L2'
+        unit_of_measurement: 'Watt'
+      power_consumption_w_l3:
+        value_template: '{{ states.sensor.power_consumption_phase_l3.state | multiply(1000) }}'
+        friendly_name: 'Stroomverbruik L3'
+        unit_of_measurement: 'Watt'
+  - platform: template
+    sensors:
+      switch1_battery_sensor:
+        value_template: '{{ states.binary_sensor.wall_switch_both_158d00026dafcd.attributes.battery_level }}'
+        unit_of_measurement: '%'

@@ -1,11 +1,11 @@
-*
+
 !*.yaml
 !.gitignore
 secrets.yaml
 known_devices.yaml
 google_calendars.yaml
 entity_registry.yaml
-custom_components/.
-deps/
-homewizard/	
+/custom_components/*
+/deps/*
+/homewizard/*	
 

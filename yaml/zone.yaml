@@ -1,0 +1,20 @@
+  - name: Home
+    latitude: !secret home_lat
+    longitude: !secret home_long
+    radius: 100
+    icon: mdi:home
+  - name: Werk
+    latitude: !secret werk1_lat
+    longitude: !secret werk1_long
+    radius: 500
+    icon: mdi:worker
+  - name: Werk
+    latitude: !secret werk2_lat
+    longitude: !secret werk2_long
+    radius: 500
+    icon: mdi:worker
+  - name: Jan en Lammie
+    latitude: !secret dr_lat
+    longitude: !secret dr_long
+    radius: 100
+    icon: mdi:flag

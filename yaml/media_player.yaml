@@ -1,0 +1,8 @@
+- platform: kodi
+  host: !secret kodi_ip
+  name: Kodi Beneden
+- platform: squeezebox
+  name: Woonkamer
+  host: !secret squeeze_ip
+  username: !secret squeeze_user
+  password: !secret squeeze_pass

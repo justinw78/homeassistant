@@ -1,0 +1,189 @@
+- platform: mqtt
+  name: "Lichtslang"
+  friendly_name: Lichtslang Blokhut
+  state_topic: "stat/buiten/POWER1"
+  command_topic: "cmnd/buiten/POWER1"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Spotjes"
+  friendly_name: Spotjes Blokhut
+  state_topic: "stat/buiten/POWER2"
+  command_topic: "cmnd/buiten/POWER2"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Waterpomp"
+  friendly_name: Tuinpomp sproei
+  state_topic: "stat/buiten/POWER3"
+  command_topic: "cmnd/buiten/POWER3"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "T.L."
+  friendly_name: T.L. Blokhut
+  state_topic: "stat/buiten/POWER4"
+  command_topic: "cmnd/buiten/POWER4"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "leddouche"
+  friendly_name: Led Douche
+  state_topic: "stat/leddouche/POWER"
+  command_topic: "cmnd/leddouche/POWER"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+  # retain: true
+- platform: mqtt
+  name: "Afzuiging1"
+  friendly_name: Afzuiging stand 1
+  state_topic: "stat/Zolder/POWER1"
+  command_topic: "cmnd/Zolder/POWER1"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Afzuiging2"
+  friendly_name: Afzuiging stand 2
+  state_topic: "stat/Zolder/POWER2"
+  command_topic: "cmnd/Zolder/POWER2"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Verlichting_opslag"
+  friendly_name: Verlichting Opslag
+  state_topic: "stat/Zolder/POWER3"
+  command_topic: "cmnd/Zolder/POWER3"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Verlichting_hal"
+  friendly_name: Verlichting Hal
+  state_topic: "stat/Zolder/POWER4"
+  command_topic: "cmnd/Zolder/POWER4"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: mqtt
+  name: "Pomp Zwembad"
+  friendly_name: Pomp Zwembad
+  state_topic: "stat/buitenhuis/POWER"
+  command_topic: "cmnd/buitenhuis/POWER"
+  qos: 1
+  retain: true
+  payload_on: "ON"
+  payload_off: "OFF"
+- platform: command_line
+  switches:
+    woonkamer:
+      command_on: "/config/homewizard/homewizard.sh -d Woonkamer -s on"
+      command_off: "/config/homewizard/homewizard.sh -d Woonkamer -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Woonkamer -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Woonkamer
+    eettafel:
+      command_on:    "/config/homewizard/homewizard.sh -d Eettafel -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Eettafel -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Eettafel -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Eettafel
+    slaapkamer:
+      command_on:    "/config/homewizard/homewizard.sh -d Slaapkamer -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Slaapkamer -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Slaapkamer -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Slaapkamer
+    keuken:
+      command_on:    "/config/homewizard/homewizard.sh -d Keuken -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Keuken -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Keuken -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Keuken
+    douchewit:
+      command_on:    "/config/homewizard/homewizard.sh -d Douchewit -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Douchewit -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Douchewit -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Douche Wit
+    babykamer:
+      command_on:    "/config/homewizard/homewizard.sh -d Babykamer -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Babykamer -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Babykamer -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Babykamer
+    wcventilator:
+      command_on:    "/config/homewizard/homewizard.sh -d Wcventilator -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Wcventilator -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Wcventilator -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: WC Ventilator
+    wclamp:
+      command_on:    "/config/homewizard/homewizard.sh -d Wclamp -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Wclamp -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Wclamp -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: WC lamp
+    gang:
+      command_on:    "/config/homewizard/homewizard.sh -d Gang -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Gang -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Gang -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Gang
+    zolderhalogeen:
+      command_on:    "/config/homewizard/homewizard.sh -d Zolderhologeen -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Zolderhologeen -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Zolderhologeen -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Zolderhalogeen
+    zoldertl:
+      command_on:    "/config/homewizard/homewizard.sh -d ZolderTl -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d ZolderTl -s off"
+      command_state: "/config/homewizard/homewizard.sh -d ZolderTl -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Zolder TL
+    overloop:
+      command_on:    "/config/homewizard/homewizard.sh -d Overloop -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Overloop -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Overloop -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Overloop
+    slaapkamerlees:
+      command_on:    "/config/homewizard/homewizard.sh -d Slaapkamerlees -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Slaapkamerlees -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Slaapkamerlees -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Bed lamp slaapkamer
+    speelkamer:
+      command_on:    "/config/homewizard/homewizard.sh -d Speelkamer -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Speelkamer -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Speelkamer -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Speelkamer
+    speelkamerdisco:
+      command_on:    "/config/homewizard/homewizard.sh -d Speelkamerdisco -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Speelkamerdisco -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Speelkamerdisco -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Discobol
+    kerst:
+      command_on:    "/config/homewizard/homewizard.sh -d Kerst -s on"
+      command_off:   "/config/homewizard/homewizard.sh -d Kerst -s off"
+      command_state: "/config/homewizard/homewizard.sh -d Kerst -g"
+      value_template: '{{ value == "on" }}'
+      friendly_name: Kerst
