@@ -9,7 +9,7 @@ entity_registry.yaml
 /custom_components/climate/*
 /deps/*
 /homewizard/*
-/www	
+/www/*	
 *.conf
 *.log
 *.sh
