@@ -5,5 +5,7 @@ secrets.yaml
 known_devices.yaml
 google_calendars.yaml
 entity_registry.yaml
-!yaml/*
-!photos/*
+custom_components/.
+deps/
+homewizard/	
+!/yaml/.
