@@ -6,6 +6,16 @@ known_devices.yaml
 google_calendars.yaml
 entity_registry.yaml
 /custom_components/*
+/custom_components/climate/*
 /deps/*
-/homewizard/*	
+/homewizard/*
+/www	
+*.conf
+*.log
+*.sh
+*.old
+.HA_VERSION
+/.storage
+.google.token
+.uuid
 
