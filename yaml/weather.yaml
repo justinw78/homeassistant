@@ -1,6 +1,6 @@
   - platform: yweather
     woeid: 728796
-    name: Doorn
+    name: !secret plaats
   - platform: yweather
     woeid: 2122265
     name: Moskou

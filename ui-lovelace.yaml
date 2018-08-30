@@ -154,7 +154,7 @@ views:
        name: Agenda
        entities: 
 #sensor.agenda_week
-         - calendar.justinw78gmailcom
+         - !secret calendar
          - calendar.schoolvakanties
          - calendar.feestdagen_in_nederland
          - calendar.christelijke_feestdagen
@@ -261,10 +261,10 @@ views:
       - type: entities
         title: Actuele Tijd van en naar werk
         entities:
-          - sensor.1_doorn_amsterdam
-          - sensor.2_amsterdam_doorn
-          - sensor.3_doorn_bunschoten
-          - sensor.4_bunschoten_doorn
+          - !secret werk1
+          - !secret werk2
+          - !secret werk3
+          - !secret werk4
       - type: entities
         title: Afstand naar huis
         entities:
@@ -280,7 +280,7 @@ views:
     title: Weer
     cards:
       - type: weather-forecast
-        entity: weather.doorn
+        entity: !secret weer1
       - type: picture-glance
         image:
         title: Weer Nederland
@@ -292,7 +292,7 @@ views:
       - type: weather-forecast
         entity: weather.pomorie
       - type: iframe
-        url: https://embed.windy.com/embed2.html?lat=52.050&lon=5.283&zoom=7&level=surface&overlay=wind&menu=&message=true&marker=&calendar=&pressure=true&type=map&location=coordinates&detail=true&detailLat=52.050&detailLon=5.283&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
+        url: weer_url1
         title: Wind
         aspect_ratio: 180%
   - icon: mdi:run-fast
@@ -964,7 +964,7 @@ views:
           - sensor.custom_card_tracker
           - sensor.custom_component_tracker
       - type: iframe
-        url: http://192.168.2.50:9000
+        url: !secret muziek_ip
         title: LMS
         aspect_ratio: 180%
   - icon: mdi:fan

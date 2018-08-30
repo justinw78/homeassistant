@@ -1,24 +1,24 @@
 #  - platform: google_travel_time
 #    name: 1_doorn_amsterdam
 #    api_key: !secret api1
-#    origin: domproostlaan 2, 3941 KG, Doorn , Nederland
-#    destination: Johannes Vermeerstraat 29, 1071 DL, Amsterdam, Nederland
+#    origin: !secret adres1
+#    destination: !secret adres2
 #    departure_time: 08:00:00
 #  - platform: google_travel_time
 #    name: 2_amsterdam_doorn
 #    api_key: !secret api2
-#    origin: Johannes Vermeerstraat 29, 1071 DL, Amsterdam, Nederland
-#    destination: domproostlaan 2, 3941 KG, Doorn , Nederland
+#    origin: !secret adres3
+#    destination: !secret adres1
 #  - platform: google_travel_time
 #    name: 3_doorn_bunschoten
 #    api_key: !secret api3
-#    origin: domproostlaan 2, 3941 KG, Doorn , Nederland
-#    destination: Broerswetering 8, 3752 AM, Bunschoten-Spakenburg, Nederland
+#    origin: !secret adres1
+#    destination: !secret adres5
 #  - platform: google_travel_time
 #    name: 4_bunschoten_doorn
 #    api_key: !secret api4
-#    origin: Broerswetering 8, 3752 AM Bunschoten-Spakenburg, Nederland
-#    destination: domproostlaan 2, 3941 KG, Doorn , Nederland
+#    origin: !secret adres5
+#    destination: !secret adres1
 #  - platform: google_travel_time
 #    name: Alina tot huis
 #    icon: mdi:rabbit
@@ -203,29 +203,6 @@
       - type: process
       - type: last_boot
       - type: since_last_boot
-#  - platform: template
-#    sensors:
-#      feestdagen_message:
-#        value_template: '{{ states.calendar.feestdagen_in_nederland.attributes.message }}'
-#        unit_of_measurement: ''
-#      feestdagen_datum:
-#        value_template: '{{ states.calendar.feestdagen_in_nederland.attributes.start_time }}'
-#        unit_of_measurement: ''
-#      agenda_week:
-#        value_template: '{{ states.calendar.week_numbers.attributes.message }}'
-#        unit_of_measurement: ''
-#      verjaardag_message:
-#        value_template: '{{ states.calendar.verjaardagen_van_vrienden.attributes.message }}'
-#        unit_of_measurement: ''
-#      verjaardag_datum:
-#        value_template: '{{ states.calendar.verjaardagen_van_vrienden.attributes.start_time }}'
-#        unit_of_measurement: ''
-#      afspraak_message:
-#        value_template: '{{ states.calendar.justinw78gmailcom.attributes.message }}'
-#        unit_of_measurement: ''
-#      afspraak_datum:
-#        value_template: '{{ states.calendar.justinw78gmailcom.attributes.start_time }}'
-#        unit_of_measurement: ''
   - platform: dsmr
     port: /dev/ttyUSB0
     dsmr_version: 5

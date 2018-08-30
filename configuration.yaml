@@ -9,7 +9,7 @@ homeassistant:
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: Europe/Amsterdam
+  time_zone: !secret time_zone
   # Customization file
   customize: !include yaml/customize.yaml
 
@@ -125,7 +125,7 @@ panel_iframe:
 xiaomi_aqara:
   discovery_retry: 5
   gateways:
-     - key: fay2y3jnyet596ee
+     - key: !secret x_gate_1
 weather: !include yaml/weather.yaml
 switch: !include yaml/switches.yaml
 group: !include yaml/groups.yaml
