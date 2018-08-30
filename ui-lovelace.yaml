@@ -292,7 +292,7 @@ views:
       - type: weather-forecast
         entity: weather.pomorie
       - type: iframe
-        url: weer_url1
+        url: !secret weer_url1
         title: Wind
         aspect_ratio: 180%
   - icon: mdi:run-fast
